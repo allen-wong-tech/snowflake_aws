@@ -1,5 +1,5 @@
 //Test Driven Development - ls like Unix list bucket [this won't work until we are done]
-    ls @stage_temp171;      
+    ls @feature_db.public.stage_temp171;      
     
     --if you had a file in your S3/stage, you would be able to see it before copying into Snowflake
     --select $1, $2, $3 from @stage_temp171/foo.csv.gz;
@@ -11,7 +11,13 @@
         Option to delete files after loading
 
 
-    https://docs.snowflake.com/en/user-guide/data-load-s3-config.html
+    Documentation
+        https://docs.snowflake.com/en/user-guide/data-load-s3-config.html
+    Scripts used
+        https://github.com/allen-wong-tech/snowflake_aws
+    Youtube Demo of this
+        https://www.youtube.com/watch?v=m5-78NkUzZA&list=PLyKI7j42vSkaVkBbl7ShSc1UUsIylyO8Z
+                                                      
     We will create
         AWS: S3 Bucket, IAM Policy & User
         Snowflake: Stage 
@@ -23,7 +29,7 @@
 --Snowflake Setup
   use role sysadmin;
   create or replace transient database feature_db;
-  create or replace warehouse play_wh with warehouse_size = 'xsmall' auto_suspend = 180 initially_suspended = true;
+  create or replace warehouse compute_wh with warehouse_size = 'xsmall' auto_suspend = 180 initially_suspended = true;
 
 /*Step 1: AWS Create S3 bucket
     //Note: Your name must be globally unique
